@@ -1,0 +1,32 @@
+{
+    "name": "thinmoto/tables",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/Users/denyspolishchyk/Projects/repositories/ui"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Thinmoto\\Tables\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "thinmoto",
+            "email": "thinmoto@gmail.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": "^10.0|^11.0",
+        "livewire/livewire": "^3.0",
+        "thinmoto/ui": "dev-main"
+    },
+    "extra" : {
+        "laravel" : {
+            "providers" : [
+                "Thinmoto\\Tables\\Providers\\ThinmotoTablesServiceProvider"
+            ]
+        }
+    }
+}
