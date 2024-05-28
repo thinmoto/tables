@@ -30,7 +30,7 @@ class Column
     {
         $this->key = $key;
         $this->label = $label;
-        $this->component = 'ui::base-cell';
+        $this->component = 'ui::cell';
 
         $this->processor = function($row, $key) {
             if(is_array($row))

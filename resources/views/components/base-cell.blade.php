@@ -9,5 +9,6 @@
     wire:loading.class="disabled"
         @endif
 >
-    {!! $column->render($row) !!}
+    {{--{!! $column->render($row) !!}--}}
+    {{ $slot }}
 </td>

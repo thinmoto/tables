@@ -20,6 +20,7 @@ class Action
 	public $showOnRowClosure;
 
 	public string $livewireEvent;
+	public Closure $livewireEventParams;
 
 	public function __construct($key, $label = '', $tableKey = 'table')
 	{
@@ -84,11 +85,21 @@ class Action
 		return $this;
 	}
 
-	public function setEvent(string $event): static
+	public function setEvent(string $event, Closure $params = null): static
 	{
 		$this->livewireEvent = $event;
+		$this->livewireEventParams = $params ?? function($row) {
+			return $row->id;
+		};;
 
 		return $this;
+	}
+
+	public function getEventParams($row)
+	{
+		$func = $this->livewireEventParams;
+
+		return $func($row);
 	}
 
 	public function setPosition(string $position): Action

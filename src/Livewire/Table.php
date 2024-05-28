@@ -96,4 +96,9 @@ abstract class Table extends Component
 
 		return false;
 	}
+
+	public function rowClass($row)
+	{
+		return '';
+	}
 }

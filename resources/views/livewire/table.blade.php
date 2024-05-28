@@ -55,8 +55,9 @@
                 <tr
                         @if($this->sortable)
                             class="sortable-tr"
-                        x-sortable-item="{{ $row->getKey() }}"
+                            x-sortable-item="{{ $row->getKey() }}"
                         @endif
+                        class="{{ $this->rowClass($row) }}"
                 >
                     @foreach($this->columns() as $column)
                         @if($column->hasLivewire())
@@ -84,12 +85,12 @@
                                             @if($action->route)
                                                 href="{{ route($action->route, $row->getKey()) }}"
                                             @elseif(!empty($action->livewireEvent))
-                                                wire:click="$dispatch('{{ $action->livewireEvent }}', {{ json_encode($column->getEventParams($row)) }})"
+                                                wire:click="$dispatch('{{ $action->livewireEvent }}', {{ json_encode($action->getEventParams($row)) }})"
                                             @else
                                                 @if($action->confirm)
                                                     x-data=""
-                                            x-on:click="if(confirm('{{ __('app.confirm_action') }}')) $wire.{{ $action->key }}('{{ $row->getKey() }}');"
-                                            @else
+                                                    x-on:click="if(confirm('{{ __('app.confirm_action') }}')) $wire.{{ $action->key }}('{{ $row->getKey() }}');"
+                                                @else
                                                 wire:click="{{ $action->key }}('{{ $row->getKey() }}')"
                                             @endif
                                             @endif
