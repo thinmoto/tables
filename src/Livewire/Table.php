@@ -20,6 +20,8 @@ abstract class Table extends Component
 	public $sortBy;
 	public $sortDirection = 'asc';
 
+	public $selectedItems = [];
+
     public function render()
     {
         return view('ui::livewire.table');

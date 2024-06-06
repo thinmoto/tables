@@ -12,7 +12,7 @@
                             <input
                                 type="checkbox"
                                 data-type="table-actions-all"
-                                @checked(count($selectedItems))
+                                @checked(!empty($selectedItems) && count($selectedItems))
                             >
                         </label>
                     </th>
@@ -59,7 +59,21 @@
                         @endif
                         class="{{ $this->rowClass($row) }}"
                 >
+                    @if($this->hasMultiActions())
+                        <td align="center" width="1%" nowrap>
+                            <label class="checkbox">
+                                <input
+                                        type="checkbox"
+                                        data-type="table-actions-all"
+                                        @checked(!empty($selectedItems) && count($selectedItems))
+                                >
+                            </label>
+                        </td>
+                    @endif
+
                     @foreach($this->columns() as $column)
+
+
                         @if($column->hasLivewire())
                             <td>
                                 @livewire($column->livewire, $column->getLivewireParams($row), key(rand()))
