@@ -173,6 +173,6 @@ class Column
 
 	public function hasActions()
 	{
-		return true;
+		return false;
 	}
 }
