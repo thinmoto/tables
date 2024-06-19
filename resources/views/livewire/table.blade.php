@@ -101,14 +101,14 @@
                                             @elseif(!empty($action->livewireEvent))
                                                 @if($action->confirm)
                                                     x-data=""
-                                                    x-on:click="if(confirm('{{ __('tables::messages.confirm_action') }}')) $wire.dispatch('{{ $action->livewireEvent }}', {{ json_encode($action->getEventParams($row)) }});"
+                                                    x-on:click="if(confirm('{{ __('ui::tables.confirm_action') }}')) $wire.dispatch('{{ $action->livewireEvent }}', {{ json_encode($action->getEventParams($row)) }});"
                                                 @else
                                                     wire:click="$dispatch('{{ $action->livewireEvent }}', {{ json_encode($action->getEventParams($row)) }})"
                                                 @endif
                                             @else
                                                 @if($action->confirm)
                                                     x-data=""
-                                                    x-on:click="if(confirm('{{ __('tables::messages.confirm_action') }}')) $wire.{{ $action->key }}('{{ $row->getKey() }}');"
+                                                    x-on:click="if(confirm('{{ __('ui::tables.confirm_action') }}')) $wire.{{ $action->key }}('{{ $row->getKey() }}');"
                                                 @else
                                                     wire:click="{{ $action->key }}('{{ $row->getKey() }}')"
                                                 @endif
