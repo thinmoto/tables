@@ -15,8 +15,8 @@ class ThinmotoTablesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-	    $this->loadViewsFrom(__DIR__.'/../../resources/views', 'tables');
-	    $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'tables');
+	    $this->loadViewsFrom(__DIR__.'/../../resources/views', 'ui');
+	    $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'ui');
 
 	    $this->publishes([
 		    __DIR__.'/../../resources/assets/js' => resource_path('js/vendor/tables'),
