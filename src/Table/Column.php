@@ -21,7 +21,7 @@ class Column
     private string $action = '';
 
 	private string $component;
-	private array $componentOptions;
+	private array $componentOptions = [];
 
     private string $livewire = '';
     private Closure $livewireParamsMaker;
