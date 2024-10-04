@@ -19,7 +19,9 @@ class Column
     private Closure $eventProcessor;
 
     private string $action = '';
-    private string $component;
+
+	private string $component;
+	private array $componentOptions;
 
     private string $livewire = '';
     private Closure $livewireParamsMaker;
@@ -79,11 +81,6 @@ class Column
         $this->sort = true;
 
         return $this;
-    }
-
-    public function getComponent(): string
-    {
-        return $this->component;
     }
 
     public function setLivewire(string $component, $paramsMaker): static
@@ -157,13 +154,6 @@ class Column
 		return $this;
 	}
 
-	public function setComponent($component)
-	{
-		$this->component = $component;
-
-		return $this;
-	}
-
 	public function setProcessor(Closure $processor): static
 	{
 		$this->processor = $processor;
@@ -174,5 +164,30 @@ class Column
 	public function hasActions()
 	{
 		return false;
+	}
+
+	/**
+	 * Set component to display cell. Must be located in resources/views/components
+	 *
+	 * @param string $component
+	 * @param array $options
+	 * @return $this
+	 */
+	public function setComponent(string $component, array $options = []): static
+	{
+		$this->component = $component;
+		$this->componentOptions = $options;
+
+		return $this;
+	}
+
+	public function getComponent(): string
+	{
+		return $this->component;
+	}
+
+	public function getComponentOptions(): array
+	{
+		return $this->componentOptions;
 	}
 }

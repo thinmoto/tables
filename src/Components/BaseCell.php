@@ -8,7 +8,7 @@ class BaseCell extends \Illuminate\View\Component
 {
 	public function __construct(
 		Column $column,
-		$row
+		mixed $row
 	) {}
 
 	public function render()

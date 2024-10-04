@@ -4,7 +4,8 @@
     @yield('before')
 
     <div class="table-view" wire:loading.delay.class="ajax-loading">
-        <table class="table {{ $this->cssClass }}" x-ref="table table-striped">
+        <div class="table-wrap">
+            <table class="table {{ $this->cssClass }}" x-ref="table table-striped">
             <thead><tr>
                 @if($this->hasMultiActions())
                     <th align="center" width="1%" nowrap>
@@ -81,6 +82,7 @@
                         @else
                             <x-dynamic-component
                                     :component="$column->getComponent()"
+                                    :options="$column->getComponentOptions()"
                                     :column="$column"
                                     :row="$row"
                             >
@@ -132,6 +134,7 @@
             @endforelse
             </tbody>
         </table>
+        </div>
 
         {{ $this->getData()->links($this->paginationView) }}
     </div>
