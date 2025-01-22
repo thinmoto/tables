@@ -85,7 +85,7 @@ class Action
 		return $this;
 	}
 
-	public function setEvent(string $event, Closure $params = null): static
+	public function setEvent(string $event, ?Closure $params = null): static
 	{
 		$this->livewireEvent = $event;
 		$this->livewireEventParams = $params ?? function($row) {

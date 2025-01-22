@@ -9,6 +9,14 @@
         wire:loading.class="disabled"
     @endif
 >
-    {{ $slot }}
+    @if(isset($row) && $url = $column->getUrl($row))
+        <a href="{{ $url }}">
+    @endif
+
+        {{ $slot }}
+
+    @if($url = $column->getUrl())
+        </a>
+    @endif
 </td>
 

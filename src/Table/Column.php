@@ -18,6 +18,8 @@ class Column
     private string $event;
     private Closure $eventProcessor;
 
+    private Closure $urlProcessor;
+
     private string $action = '';
 
 	private string $component;
@@ -116,6 +118,13 @@ class Column
         return $this;
     }
 
+    public function setUrl($urlProcessor = null): static
+    {
+        $this->urlProcessor = $urlProcessor;
+
+        return $this;
+    }
+
     public function render($row)
     {
         $func = $this->processor;
@@ -146,6 +155,16 @@ class Column
 
         return $func ? $func($row, $this->key) : null;
     }
+
+	public function getUrl($row = null): ?string
+	{
+		if(empty($row))
+			return null;
+
+		$func = !empty($this->urlProcessor) ? $this->urlProcessor : null;
+
+		return $func ? $func($row, $this->key) : null;
+	}
 
 	public function setClass($class)
 	{

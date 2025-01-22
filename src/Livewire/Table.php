@@ -2,6 +2,7 @@
 
 namespace Thinmoto\Tables\Livewire;
 
+use Illuminate\Support\Arr;
 use Thinmoto\Tables\Table\Column;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -75,7 +76,7 @@ abstract class Table extends Component
 
 	### ACTIONS
 
-	public function updateSort($order): void
+	public function updateSort($sortData): void
 	{
 
 	}

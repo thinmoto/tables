@@ -49,14 +49,16 @@
             <tbody
                     @if($this->sortable)
                         x-sortable
-                    x-on:sorted="$wire.updateSort($event.detail)"
+                        x-on:sorted="$wire.updateSort($event.detail)"
                     @endif
             >
+            @php $sortCounter = 0; @endphp
             @forelse($this->getData() as $row)
+                @php $sortCounter++; @endphp
                 <tr
                         @if($this->sortable)
                             class="sortable-tr"
-                            x-sortable-item="{{ $row->getKey() }}"
+                            x-sortable-item="{{ $sortCounter }}"
                         @endif
                         class="{{ $this->rowClass($row) }}"
                 >
