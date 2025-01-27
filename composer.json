@@ -2,8 +2,8 @@
     "name": "thinmoto/tables",
     "repositories": [
         {
-            "type": "path",
-            "url": "/Users/denyspolishchyk/Projects/repositories/ui"
+            "type": "vcs",
+            "url": "https://github.com/thinmoto/ui"
         }
     ],
     "autoload": {
@@ -18,9 +18,9 @@
         }
     ],
     "require": {
-        "laravel/framework": "^10.0|^11.0",
-        "livewire/livewire": "^3.0",
-        "thinmoto/ui": "dev-main"
+        "laravel/framework": "11.31.0.0",
+        "livewire/livewire": "3.5.2.0",
+        "thinmoto/ui": "dev-master"
     },
     "extra" : {
         "laravel" : {
