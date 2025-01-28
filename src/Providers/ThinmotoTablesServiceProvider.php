@@ -19,9 +19,8 @@ class ThinmotoTablesServiceProvider extends ServiceProvider
 	    $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'ui');
 
 	    $this->publishes([
-		    __DIR__.'/../../resources/assets/js' => resource_path('js/vendor/tables'),
-		    __DIR__.'/../../resources/assets/scss' => resource_path('scss/vendor/tables'),
-	    ], 'ui.tables');
+		    __DIR__.'/../../resources/assets' => resource_path('vendor/thinmoto/tables'),
+	    ], 'thinmoto-tables-assets');
 
 	    Livewire::component('ui::table', Table::class);
 

@@ -1,11 +1,5 @@
 {
     "name": "thinmoto/tables",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/thinmoto/ui"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "Thinmoto\\Tables\\": "src/"
@@ -19,8 +13,7 @@
     ],
     "require": {
         "laravel/framework": "^11.0",
-        "livewire/livewire": "^3.5",
-        "thinmoto/ui": "dev-master"
+        "livewire/livewire": "^3.5"
     },
     "extra" : {
         "laravel" : {

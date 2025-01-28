@@ -1,11 +1,9 @@
 ## Installation
 
-Install package
+```
+composer require thinmoto/tables
+php artisan vendor:publish --tag=thinmoto-tables-assets
+```
 
-``composer require thinmoto/tables``
-
-Import assets in your **.js** ans **.scss**
-
-``import './../../vendor/thinmoto/tables/resources/assets/js/table.js';``
-
-``@import "./../../vendor/thinmoto/tables/resources/assets/scss/table";``
+Include ``resources/vendor/thinmoto/tables/js/table.js`` before ``Livewire.start();``
+Include ``resources/vendor/thinmoto/tables/scss/table.scss`` somewhere 
