@@ -12,7 +12,7 @@
                         <label class="checkbox">
                             <input
                                 type="checkbox"
-                                data-type="table-actions-all"
+                                class="form-check-input form-check-input-lg fs-5"
                                 @checked(!empty($selectedItems) && count($selectedItems))
                             >
                         </label>
@@ -21,17 +21,17 @@
 
                 @foreach($this->columns() as $column)
                     @if($column->hasSorting())
-                        <th class="cursor-pointer" wire:click="sortColumn('{{ $column->getKey() }}')" nowrap>
+                        <th role="button" wire:click="sortColumn('{{ $column->getKey() }}')" nowrap>
                             {{ $column->getLabel() }}
 
                             @if($sortBy === $column->getKey())
                                 @if ($sortDirection === 'asc')
-                                    <i class="fas fa-sort-up"></i>
+                                    <i class="fa-solid fa-arrow-down-a-z text-muted opacity-75"></i>
                                 @else
-                                    <i class="fas fa-sort-down"></i>
+                                    <i class="fa-solid fa-arrow-down-z-a text-muted opacity-75"></i>
                                 @endif
                             @else
-                                <i class="fas fa-sort"></i>
+                                <i class="fas fa-sort text-muted opacity-75"></i>
                             @endif
                         </th>
                     @else
@@ -67,7 +67,9 @@
                             <label class="checkbox">
                                 <input
                                         type="checkbox"
+                                        class="form-check-input form-check-input-lg fs-5"
                                         data-type="table-actions-all"
+                                        wire:model.live="selectedItems.{{ $sortCounter }}"
                                         @checked(!empty($selectedItems) && count($selectedItems))
                                 >
                             </label>
@@ -94,11 +96,23 @@
 
                     @if($this->hasActions())
                         <td nowrap="">
+                            @if($this->dropdownActions)
+                                <div class="dropdown">
+                                    <button class="btn btn-sm" type="button" x-on:click="$el.classList.add('btn-light'); setTimeout(function(){ $el.nextElementSibling.classList.add('show') }, 10)">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                    <ul class="dropdown-menu" data-type="table-action-menu" style="right:0" @click.away="$el.classList.remove('show'); $el.previousElementSibling.classList.remove('btn-light')">
+                            @endif
+
                             @foreach($this->actions() as $action)
                                 @if($action->showOnRow($row))
+                                    @if($this->dropdownActions)
+                                        <li>
+                                    @endif
+
                                     <a
                                             wire:key="{{ rand() }}"
-                                            class="btn btn-{{ $action->class }} btn-sm"
+                                            class="{{ $this->dropdownActions ? 'dropdown-item text-'.$action->class : 'btn btn-sm btn-'.$action->class }}"
 
                                             @if($action->route)
                                                 href="{{ route($action->route, $row->getKey()) }}"
@@ -124,8 +138,17 @@
 
                                         {{ $action->label }}
                                     </a>
+
+                                    @if($this->dropdownActions)
+                                        </li>
+                                    @endif
                                 @endif
                             @endforeach
+
+                            @if($this->dropdownActions)
+                                    </ul>
+                                </div>
+                            @endif
                         </td>
                     @endif
                 </tr>

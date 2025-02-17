@@ -2,6 +2,7 @@
 
 ```
 composer require thinmoto/tables
+npm install sortablejs
 php artisan vendor:publish --tag=thinmoto-tables-assets
 ```
 

@@ -18,6 +18,8 @@ abstract class Table extends Component
 	protected bool $sortable = false;
 	protected $perPage = 10;
 
+	protected bool $dropdownActions = false;
+
 	public $sortBy;
 	public $sortDirection = 'asc';
 
