@@ -26,9 +26,9 @@
 
                             @if($sortBy === $column->getKey())
                                 @if ($sortDirection === 'asc')
-                                    <i class="fa-solid fa-arrow-down-a-z text-muted opacity-75"></i>
+                                    <i class="fa-solid fa-arrow-down-short-wide text-muted opacity-75"></i>
                                 @else
-                                    <i class="fa-solid fa-arrow-down-z-a text-muted opacity-75"></i>
+                                    <i class="fa-solid fa-arrow-up-wide-short text-muted opacity-75"></i>
                                 @endif
                             @else
                                 <i class="fas fa-sort text-muted opacity-75"></i>
