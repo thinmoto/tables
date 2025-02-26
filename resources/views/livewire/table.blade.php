@@ -19,6 +19,12 @@
                     </th>
                 @endif
 
+                @if($this->sortable)
+                    <th align="center" width="1%" nowrap>
+                        <i class="fa-solid fa-arrows-up-down"></i>
+                    </th>
+                @endif
+
                 @foreach($this->columns() as $column)
                     @if($column->hasSorting())
                         <th role="button" wire:click="sortColumn('{{ $column->getKey() }}')" nowrap>
@@ -73,6 +79,14 @@
                                         @checked(!empty($selectedItems) && count($selectedItems))
                                 >
                             </label>
+                        </td>
+                    @endif
+
+                    @if($this->sortable)
+                        <td align="center" width="1%" nowrap class="x-sortable-handle">
+                            <span role="button" class="btn btn-sm">
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </span>
                         </td>
                     @endif
 
