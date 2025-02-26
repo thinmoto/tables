@@ -84,9 +84,7 @@
 
                     @if($this->sortable)
                         <td align="center" width="1%" nowrap class="x-sortable-handle">
-                            <span role="button" class="btn btn-sm">
-                                <i class="fa-solid fa-ellipsis-vertical"></i>
-                            </span>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
                         </td>
                     @endif
 
