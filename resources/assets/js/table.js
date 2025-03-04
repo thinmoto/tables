@@ -3,4 +3,3 @@ import sortable from "./alpine/SortablePlugin.js";
 
 Alpine.data('Table', Table);
 Alpine.plugin(sortable);
-``
