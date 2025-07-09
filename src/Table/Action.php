@@ -13,7 +13,9 @@ class Action
 	public string $key;
 	public string $label;
 	public bool $confirm = false;
+
 	public string $route = '';
+	public Closure $routeParams;
 
 	public bool $isMulti = false;
 
@@ -78,9 +80,12 @@ class Action
 		return $this;
 	}
 
-	public function setRoute(string $action): Action
+	public function setRoute(string $action, ?Closure $params = null): Action
 	{
 		$this->route = $action;
+		$this->routeParams = $params ?? function($row) {
+			return $row->id;
+		};;
 
 		return $this;
 	}
