@@ -85,9 +85,16 @@ class Action
 		$this->route = $action;
 		$this->routeParams = $params ?? function($row) {
 			return $row->id;
-		};;
+		};
 
 		return $this;
+	}
+
+	public function getRouteParams($row)
+	{
+		$func = $this->routeParams;
+
+		return $func($row);
 	}
 
 	public function setEvent(string $event, ?Closure $params = null): static
@@ -95,7 +102,7 @@ class Action
 		$this->livewireEvent = $event;
 		$this->livewireEventParams = $params ?? function($row) {
 			return $row->id;
-		};;
+		};
 
 		return $this;
 	}
