@@ -7,154 +7,166 @@ use Thinmoto\Tables\Components\BaseCell;
 
 class Column
 {
-    private string $key;
-    private string $label;
+	private string $key;
+	private string $label;
 
-    private bool $sort = false;
+	private bool $sort = false;
 
-    private Closure $processor;
-    private Closure $actionProcessor;
+	private Closure $processor;
+	private Closure $actionProcessor;
 
-    private string $event;
-    private Closure $eventProcessor;
+	private string $event;
+	private Closure $eventProcessor;
 
-    private Closure $urlProcessor;
+	private Closure $urlProcessor;
 
-    private string $action = '';
+	private string $action = '';
 
 	private string $component;
 	private array $componentOptions = [];
 
-    private string $livewire = '';
-    private Closure $livewireParamsMaker;
+	private string $livewire = '';
+	private Closure $livewireParamsMaker;
 
 	public string $class = '';
 
-    public function __construct(string $key, string $label = '')
-    {
-        $this->key = $key;
-        $this->label = $label;
-        $this->component = 'ui::cell';
+	public function __construct(string $key, string $label = '')
+	{
+		$this->key = $key;
+		$this->label = $label;
+		$this->component = 'ui::cell';
 
-        $this->processor = function($row, $key) {
-            if(is_array($row))
-                return $row[$key];
+		$this->processor = function($row, $key) {
+			if(is_array($row))
+				return $row[$key];
 
-            return $row->{$key};
-        };
+			return $row->{$key};
+		};
 
-        $this->actionProcessor = function($row, $key) {
-            if(is_array($row))
-                return ['id' => $row[$key]];
+		$this->actionProcessor = function($row, $key) {
+			if(is_array($row))
+				return ['id' => $row[$key]];
 
-            return ['id' => $row->{$key}];
-        };
+			return ['id' => $row->{$key}];
+		};
 
-        $this->eventProcessor = function($row, $key) {
-            if(is_array($row))
-                return ['id' => $row[$key]];
+		$this->eventProcessor = function($row, $key) {
+			if(is_array($row))
+				return ['id' => $row[$key]];
 
-            return [$row->getKey()];
-        };
-    }
+			return [$row->getKey()];
+		};
+	}
 
-    public static function make($key, $label = ''): static
-    {
-        return new static($key, $label);
-    }
+	public static function make($key, $label = ''): static
+	{
+		return new static($key, $label);
+	}
 
-    public function getKey(): string
-    {
-        return $this->key;
-    }
+	public function getKey(): string
+	{
+		return $this->key;
+	}
 
-    public function getLabel(): string
-    {
-        return $this->label;
-    }
+	public function getLabel(): string
+	{
+		return $this->label;
+	}
 
-    public function hasSorting(): bool
-    {
-        return $this->sort;
-    }
+	public function hasSorting(): bool
+	{
+		return $this->sort;
+	}
 
-    public function enableSorting(): static
-    {
-        $this->sort = true;
+	public function enableSorting(): static
+	{
+		$this->sort = true;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function setLivewire(string $component, $paramsMaker): static
-    {
-        $this->livewire = $component;
-        $this->livewireParamsMaker = $paramsMaker;
+	public function setLivewire(string $component, $paramsMaker): static
+	{
+		$this->livewire = $component;
+		$this->livewireParamsMaker = $paramsMaker;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function hasLivewire(): bool
-    {
-        return (bool)$this->livewire;
-    }
+	public function hasLivewire(): bool
+	{
+		return (bool)$this->livewire;
+	}
 
-    public function setAction(string $action, $actionProcessor = null): static
-    {
-        $this->action = $action;
+	public function getLivewire(): ?string
+	{
+		return $this->livewire ?? null;
+	}
 
-        if(!empty($actionProcessor))
-            $this->actionProcessor = $actionProcessor;
+	public function getLivewireParams($row)
+	{
+		$func = $this->livewireParamsMaker;
 
-        return $this;
-    }
+		return $func($row, $this->key);
+	}
 
-    public function setEvent(string $event, $eventProcessor = null): static
-    {
-        $this->event = $event;
+	public function setAction(string $action, $actionProcessor = null): static
+	{
+		$this->action = $action;
 
-        if(!empty($eventProcessor))
-            $this->eventProcessor = $eventProcessor;
+		if(!empty($actionProcessor))
+			$this->actionProcessor = $actionProcessor;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function setUrl($urlProcessor = null): static
-    {
-        $this->urlProcessor = $urlProcessor;
+	public function setEvent(string $event, $eventProcessor = null): static
+	{
+		$this->event = $event;
 
-        return $this;
-    }
+		if(!empty($eventProcessor))
+			$this->eventProcessor = $eventProcessor;
 
-    public function render($row)
-    {
-        $func = $this->processor;
+		return $this;
+	}
 
-        return $func($row, $this->key);
-    }
+	public function setUrl($urlProcessor = null): static
+	{
+		$this->urlProcessor = $urlProcessor;
 
-    public function getAction()
-    {
-	    return !empty($this->action) ? $this->action : null;
-    }
+		return $this;
+	}
 
-    public function getActionParams($row)
-    {
-        $func = $this->actionProcessor;
+	public function render($row)
+	{
+		$func = $this->processor;
 
-        return $func($row, $this->key);
-    }
+		return $func($row, $this->key);
+	}
 
-    public function getEvent()
-    {
-        return !empty($this->event) ? $this->event : null;
-    }
+	public function getAction()
+	{
+		return !empty($this->action) ? $this->action : null;
+	}
 
-    public function getEventParams($row)
-    {
-        $func = !empty($this->eventProcessor) ? $this->eventProcessor : null;
+	public function getActionParams($row)
+	{
+		$func = $this->actionProcessor;
 
-        return $func ? $func($row, $this->key) : null;
-    }
+		return $func($row, $this->key);
+	}
+
+	public function getEvent()
+	{
+		return !empty($this->event) ? $this->event : null;
+	}
+
+	public function getEventParams($row)
+	{
+		$func = !empty($this->eventProcessor) ? $this->eventProcessor : null;
+
+		return $func ? $func($row, $this->key) : null;
+	}
 
 	public function getUrl($row = null): ?string
 	{

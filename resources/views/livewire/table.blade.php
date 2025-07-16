@@ -93,7 +93,7 @@
 
                             @if($column->hasLivewire())
                                 <td>
-                                    @livewire($column->livewire, $column->getLivewireParams($row), key(rand()))
+                                    @livewire($column->getLivewire(), $column->getLivewireParams($row), key(rand()))
                                 </td>
                             @else
                                 <x-dynamic-component
